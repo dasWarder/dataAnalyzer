@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/dataAnalyser.iml" filepath="$PROJECT_DIR$/dataAnalyser.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../web-producer/web-producer.iml" filepath="$PROJECT_DIR$/../web-producer/web-producer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web-data-producer/web-data-producer.iml" filepath="$PROJECT_DIR$/web-data-producer/web-data-producer.iml" />
     </modules>
   </component>
 </project>

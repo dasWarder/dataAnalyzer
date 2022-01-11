@@ -3,7 +3,7 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/../web-producer/pom.xml" />
+        <option value="$PROJECT_DIR$/web-data-producer/pom.xml" />
       </list>
     </option>
   </component>

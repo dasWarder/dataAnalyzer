@@ -7,15 +7,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="web-producer" />
+        <module name="web-data-producer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="web-data-producer" target="11" />
       <module name="web-producer" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="web-data-producer" options="-parameters" />
       <module name="web-producer" options="-parameters" />
     </option>
   </component>
