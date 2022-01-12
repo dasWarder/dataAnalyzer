@@ -8,10 +8,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="web-data-producer" />
+        <module name="analytics-service" />
         <module name="elastic-kafka-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="analytics-service" target="11" />
       <module name="elastic-kafka-service" target="11" />
       <module name="elastic-service" target="11" />
       <module name="web-data-producer" target="11" />
@@ -20,6 +22,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="analytics-service" options="-parameters" />
       <module name="elastic-kafka-service" options="-parameters" />
       <module name="elastic-service" options="-parameters" />
       <module name="web-data-producer" options="-parameters" />
