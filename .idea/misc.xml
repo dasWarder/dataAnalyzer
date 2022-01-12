@@ -4,6 +4,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/web-data-producer/pom.xml" />
+        <option value="$PROJECT_DIR$/elastic-kafka-service/pom.xml" />
       </list>
     </option>
   </component>
