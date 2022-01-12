@@ -13,3 +13,6 @@ kafka:
     data: rawData
   keys:
     data: data
+
+elasticsearch:
+  port: localhost:9200

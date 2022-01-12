@@ -33,3 +33,13 @@ services:
       - zookeeper
     networks:
       - data-analyzer
+
+  elastic-search:
+    image: elasticsearch:7.14.2
+    container_name: elasticsearch
+    restart: always
+    ports:
+      - '9200:9200'
+      - '9300:9300'
+    environment:
+      - discovery.type=single-node
