@@ -19,7 +19,5 @@ public interface AnalysisDataService {
 
     void deleteAnalysisDataByDataId(String dataId);
 
-    Page<AnalysisData> getAllAnalysisData(Pageable pageable);
-
-    Page<AnalysisData> getAllAnalysisDataByCreatingDate(LocalDateTime creatingDate, Pageable pageable);
+    Page<AnalysisData> getAllAnalysisData(LocalDateTime creatingDate, Pageable pageable);
 }

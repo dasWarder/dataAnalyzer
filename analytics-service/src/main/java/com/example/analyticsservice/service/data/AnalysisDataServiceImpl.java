@@ -1,6 +1,5 @@
 package com.example.analyticsservice.service.data;
 
-
 import com.example.analyticsservice.exception.AnalysisDataNotFoundException;
 import com.example.analyticsservice.model.AnalysisData;
 import com.example.analyticsservice.repository.AnalysisDataRepository;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Slf4j
 @Service
@@ -89,20 +89,16 @@ public class AnalysisDataServiceImpl implements AnalysisDataService {
 
   @Override
   @Transactional(readOnly = true)
-  public Page<AnalysisData> getAllAnalysisData(Pageable pageable) {
+  public Page<AnalysisData> getAllAnalysisData(LocalDateTime creatingDate, Pageable pageable) {
 
-    log.info("In AnalysisDataServiceImpl.getAllAnalysisData - Get all analysisData");
+    if (Objects.isNull(creatingDate)) {
 
-    return dataRepository.findAll(pageable);
-  }
-
-  @Override
-  @Transactional(readOnly = true)
-  public Page<AnalysisData> getAllAnalysisDataByCreatingDate(
-      LocalDateTime creatingDate, Pageable pageable) {
+      log.info("In AnalysisDataServiceImpl.getAllAnalysisData - Get all analysisData");
+      return dataRepository.findAll(pageable);
+    }
 
     log.info(
-        "In AnalysisDataServiceImpl.getAllAnalysisDataByCreatingDate - Get all analysisData by creating date = {}",
+        "In AnalysisDataServiceImpl.getAllAnalysisData - Get all analysisData by creating date = {}",
         creatingDate);
 
     return dataRepository.getAllByCreatingDate(creatingDate, pageable);

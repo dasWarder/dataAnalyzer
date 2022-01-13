@@ -17,25 +17,29 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class KafkaServiceImpl implements KafkaService {
 
-    private final ObjectMapper objectMapper;
+  private final ObjectMapper objectMapper;
 
-    private final InputDataService inputDataService;
+  private final InputDataService inputDataService;
 
-    @Override
-    @KafkaListener(id = "#{'${kafka.keys.data}'}", topics = {"#{'${kafka.topics.data}'}"}, groupId = "#{'${kafka.groups.data}'}")
-    public void receiveMessage(String data) throws InputDataNotStoredException {
+  @Override
+  @KafkaListener(
+      id = "#{'${kafka.keys.data}'}",
+          topics = {"#{'${kafka.topics.data}'}"},
+      groupId = "#{'${kafka.groups.data}'}")
+  public void receiveMessage(String data) throws InputDataNotStoredException {
 
-        InputData inputData = mapObject(data);
-        InputData storedData = inputDataService.saveInputData(inputData);
+    InputData inputData = mapObject(data);
+    InputData storedData = inputDataService.saveInputData(inputData);
 
-        log.info("In KafkaServiceImpl.receiveMessage - InputData with id = {} stored", storedData.getId());
+    log.info(
+        "In KafkaServiceImpl.receiveMessage - InputData with id = {} stored", storedData.getId());
+  }
+
+  private InputData mapObject(String data) {
+    try {
+      return objectMapper.readValue(data, InputData.class);
+    } catch (JsonProcessingException e) {
+      throw new RuntimeException();
     }
-
-    private InputData mapObject(String data) {
-        try {
-            return objectMapper.readValue(data, InputData.class);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException();
-        }
-    }
+  }
 }
