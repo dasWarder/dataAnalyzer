@@ -1,6 +1,7 @@
 package com.example.analyticsservice.service.kafka;
 
 import com.example.analyticsservice.dto.InputData;
+import com.example.analyticsservice.exception.AnalysisDataNotFoundException;
 import com.example.analyticsservice.mappingService.InputDataMapper;
 import com.example.analyticsservice.model.AnalysisData;
 import com.example.analyticsservice.service.data.AnalysisDataService;
@@ -11,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 @Slf4j
 @Service
@@ -27,14 +30,19 @@ public class KafkaServiceImpl implements KafkaService {
   @Override
   @KafkaListener(
       id = "#{'${kafka.keys.data}'}",
-      topics = {"#{'${kafka.topics.data}'}"}, groupId = "#{'${kafka.groups.data}'}")
-  public void produceMessage(String data) {
+      topics = {"#{'${kafka.topics.data}'}"},
+      groupId = "#{'${kafka.groups.data}'}")
+  public void produceMessage(String data) throws AnalysisDataNotFoundException {
 
     InputData inputData = mapToObject(data);
-    log.info("Input data info: {}", inputData.toString());
     AnalysisData analysisData = inputDataMapper.inputDataToAnalysisData(inputData);
-    log.info("Analysis data info: {}", analysisData.toString());
     AnalysisData storedData = dataService.saveAnalysisData(analysisData);
+
+    if (Objects.isNull(storedData)) {
+
+      log.error("An empty object was received in request");
+      throw new AnalysisDataNotFoundException(String.format("Data object is null"));
+    }
   }
 
   private InputData mapToObject(String data) {

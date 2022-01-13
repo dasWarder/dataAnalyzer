@@ -1,0 +1,17 @@
+server:
+  port: 2227
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:3344/analysis_db
+    username: user
+    password: pass
+    driver-class-name: org.postgresql.Driver
+    jpa:
+      generate-ddl: false
+      show-sql: true
+      hibernate:
+        ddl-auto: none
+
+elasticsearch:
+  port: localhost:9200
