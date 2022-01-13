@@ -1,4 +1,4 @@
-package com.example.elastickafkaservice.config;
+package com.example.queryservice.config;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -20,12 +20,14 @@
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.4.2.Final/mapstruct-1.4.2.Final.jar" />
         </processorPath>
         <module name="analytics-service" />
+        <module name="query-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="analytics-service" target="11" />
       <module name="elastic-kafka-service" target="11" />
       <module name="elastic-service" target="11" />
+      <module name="query-service" target="11" />
       <module name="web-data-producer" target="11" />
       <module name="web-producer" target="11" />
     </bytecodeTargetLevel>
@@ -35,6 +37,7 @@
       <module name="analytics-service" options="-parameters -Amapstruct.defaultComponentModel=spring" />
       <module name="elastic-kafka-service" options="-parameters" />
       <module name="elastic-service" options="-parameters" />
+      <module name="query-service" options="-parameters -Amapstruct.defaultComponentModel=spring" />
       <module name="web-data-producer" options="-parameters" />
       <module name="web-producer" options="-parameters" />
     </option>
