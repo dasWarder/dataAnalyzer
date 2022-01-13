@@ -1,4 +1,4 @@
-package com.example.analyticsservice.service;
+package com.example.analyticsservice.service.kafka;
 
 import com.example.analyticsservice.exception.AnalysisDataNotFoundException;
 
