@@ -1,13 +1,13 @@
 <component name="libraryTable">
-  <library name="Maven: org.jboss.logging:jboss-logging:3.4.2.Final">
+  <library name="Maven: net.minidev:json-smart:2.4.7">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/jboss/logging/jboss-logging/3.4.2.Final/jboss-logging-3.4.2.Final.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/net/minidev/json-smart/2.4.7/json-smart-2.4.7.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/org/jboss/logging/jboss-logging/3.4.2.Final/jboss-logging-3.4.2.Final-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/net/minidev/json-smart/2.4.7/json-smart-2.4.7-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/jboss/logging/jboss-logging/3.4.2.Final/jboss-logging-3.4.2.Final-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/net/minidev/json-smart/2.4.7/json-smart-2.4.7-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

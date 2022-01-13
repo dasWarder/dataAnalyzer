@@ -43,3 +43,15 @@ services:
       - '9300:9300'
     environment:
       - discovery.type=single-node
+
+  postgre:
+    image: postgres:13.5-alpine3.15
+    container_name: 'analysis-db'
+    restart: always
+    ports:
+    - '3344:5432'
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: analysis_db
+
