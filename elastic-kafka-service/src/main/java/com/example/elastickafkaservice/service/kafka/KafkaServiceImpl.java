@@ -22,7 +22,7 @@ public class KafkaServiceImpl implements KafkaService {
     private final InputDataService inputDataService;
 
     @Override
-    @KafkaListener(id = "#{'${kafka.keys.data}'}", topics = {"#{'${kafka.topics.data}'}"})
+    @KafkaListener(id = "#{'${kafka.keys.data}'}", topics = {"#{'${kafka.topics.data}'}"}, groupId = "#{'${kafka.groups.data}'}")
     public void receiveMessage(String data) throws InputDataNotStoredException {
 
         InputData inputData = mapObject(data);

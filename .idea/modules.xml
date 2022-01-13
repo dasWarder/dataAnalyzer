@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/analytics-service/analytics-service.iml" filepath="$PROJECT_DIR$/analytics-service/analytics-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/dataAnalyser.iml" filepath="$PROJECT_DIR$/dataAnalyser.iml" />
       <module fileurl="file://$PROJECT_DIR$/elastic-kafka-service/elastic-kafka-service.iml" filepath="$PROJECT_DIR$/elastic-kafka-service/elastic-kafka-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/web-data-producer/web-data-producer.iml" filepath="$PROJECT_DIR$/web-data-producer/web-data-producer.iml" />
