@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
@@ -24,6 +25,7 @@ public class DataProjectionImpl implements DataProjection {
   private final AnalysisDataReadRepository analysisDataRepository;
 
   @Override
+  @Transactional(readOnly = true)
   public Page<InputData> handleInputData(AllInputData query) {
 
     log.info("In DataProjectionImpl. handleInputData - Handle data by allInputData query");
@@ -32,6 +34,7 @@ public class DataProjectionImpl implements DataProjection {
   }
 
   @Override
+  @Transactional(readOnly = true)
   public Page<InputData> handleInputData(InputDataByAuthor query) {
 
     log.info("In DataProjectionImpl.handleInputData - Handle data by InputDataByAuthor query");
@@ -40,6 +43,7 @@ public class DataProjectionImpl implements DataProjection {
   }
 
   @Override
+  @Transactional(readOnly = true)
   public Page<InputData> handleInputData(InputDataByDate query) {
 
     log.info("In DataProjectionImpl.handleInputData - Handle data by InputDataByDate query");
@@ -48,6 +52,7 @@ public class DataProjectionImpl implements DataProjection {
   }
 
   @Override
+  @Transactional(readOnly = true)
   public Long handleAnalysisData(AnalysisDataCountByAuthor query) {
 
     log.info(
@@ -57,6 +62,7 @@ public class DataProjectionImpl implements DataProjection {
   }
 
   @Override
+  @Transactional(readOnly = true)
   public Long handleAnalysisData(AnalysisDataCountByCreatingDate query) {
 
     log.info(
@@ -66,6 +72,7 @@ public class DataProjectionImpl implements DataProjection {
   }
 
   @Override
+  @Transactional(readOnly = true)
   public Long handleAnalysisData(AnalysisDataCountByAuthorAndCreatingDate query) {
 
     log.info(

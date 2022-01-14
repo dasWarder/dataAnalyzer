@@ -21,6 +21,7 @@
         </processorPath>
         <module name="analytics-service" />
         <module name="query-service" />
+        <module name="web-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -30,6 +31,7 @@
       <module name="query-service" target="11" />
       <module name="web-data-producer" target="11" />
       <module name="web-producer" target="11" />
+      <module name="web-service" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -40,6 +42,7 @@
       <module name="query-service" options="-parameters -Amapstruct.defaultComponentModel=spring" />
       <module name="web-data-producer" options="-parameters" />
       <module name="web-producer" options="-parameters" />
+      <module name="web-service" options="-parameters -Amapstruct.defaultComponentModel=spring" />
     </option>
   </component>
 </project>
