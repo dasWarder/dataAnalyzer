@@ -1,4 +1,4 @@
-package com.example.queryservice.dto.query;
+package com.example.queryservice.dto.query.inputData;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,9 +10,7 @@ import org.springframework.data.domain.Pageable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class InputDataByAuthor {
-
-    private String author;
+public class AllInputData {
 
     private Pageable pageable;
 }
