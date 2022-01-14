@@ -6,6 +6,7 @@ import com.example.queryservice.dto.read.analysisData.AnalysisDateData;
 import com.example.queryservice.dto.read.inputData.MainData;
 import com.example.queryservice.projection.dataProjector.DataProjector;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+
 
 @RestController
 @RequiredArgsConstructor

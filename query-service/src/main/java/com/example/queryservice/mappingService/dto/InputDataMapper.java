@@ -8,8 +8,5 @@ import org.mapstruct.Mapping;
 @Mapper
 public interface InputDataMapper {
 
-  @Mapping(target = "id", ignore = true)
-  @Mapping(target = "dataId", ignore = true)
-  @Mapping(target = "processingDate", ignore = true)
   MainData inputDataToMainData(InputData inputData);
 }
