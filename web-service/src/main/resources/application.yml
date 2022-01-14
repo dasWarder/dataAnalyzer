@@ -1,1 +1,6 @@
+server:
+  port: 2228
 
+uri:
+  input: http://localhost:2227/api/v1/data/input
+  analysis: http://localhost:2227/api/v1/data/analysis
