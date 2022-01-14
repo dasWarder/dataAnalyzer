@@ -1,6 +1,11 @@
-package com.example.queryservice.projection;
+package com.example.queryservice.projection.dataProjection;
 
-import com.example.queryservice.dto.query.*;
+import com.example.queryservice.dto.query.analysisData.AnalysisDataCountByAuthor;
+import com.example.queryservice.dto.query.analysisData.AnalysisDataCountByAuthorAndCreatingDate;
+import com.example.queryservice.dto.query.analysisData.AnalysisDataCountByCreatingDate;
+import com.example.queryservice.dto.query.inputData.AllInputData;
+import com.example.queryservice.dto.query.inputData.InputDataByAuthor;
+import com.example.queryservice.dto.query.inputData.InputDataByDate;
 import com.example.queryservice.model.InputData;
 import com.example.queryservice.repository.AnalysisDataReadRepository;
 import com.example.queryservice.repository.InputDataReadRepository;

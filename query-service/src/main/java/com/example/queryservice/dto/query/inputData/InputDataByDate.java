@@ -1,9 +1,10 @@
-package com.example.queryservice.dto.query;
+package com.example.queryservice.dto.query.inputData;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDateTime;
 
@@ -11,9 +12,9 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AnalysisDataCountByAuthorAndCreatingDate {
+public class InputDataByDate {
 
-    private String author;
+    private LocalDateTime dateTime;
 
-    private LocalDateTime creatingDate;
+    private Pageable pageable;
 }
