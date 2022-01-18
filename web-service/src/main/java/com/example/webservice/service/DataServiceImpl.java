@@ -104,12 +104,12 @@ public class DataServiceImpl implements DataService {
   }
 
   @Override
-  public HttpEntity<AnalysisDateData> getAnalysedDataByCreatingDate(LocalDateTime creatingDate) {
+  public HttpEntity<AnalysisDateData> getAnalysedDataByCreatingDate(String creatingDate) {
 
     HttpEntity<?> entity = getHttpEntity();
     String uriTemplate =
         formulateUriTemplate(baseAnalysisDataUri + "/creatingDate", "creatingDate");
-    Map<String, String> params = getParamsMap(new Param("creatingDate", creatingDate.toString()));
+    Map<String, String> params = getParamsMap(new Param("creatingDate", creatingDate));
 
     ResponseEntity<AnalysisDateData> exchange =
         restTemplate.exchange(uriTemplate, HttpMethod.GET, entity, AnalysisDateData.class, params);
@@ -123,13 +123,13 @@ public class DataServiceImpl implements DataService {
 
   @Override
   public HttpEntity<AnalysisAuthorDateData> getAnalysedDataByAuthorAndCreatingDate(
-      String author, LocalDateTime creatingDate) {
+      String author, String creatingDate) {
 
     HttpEntity<?> entity = getHttpEntity();
     String uriTemplate = formulateUriTemplate(baseAnalysisDataUri, "author", "creatingDate");
     Map<String, String> params =
         getParamsMap(
-            new Param("author", author), new Param("creatingDate", creatingDate.toString()));
+            new Param("author", author), new Param("creatingDate", creatingDate));
 
     ResponseEntity<AnalysisAuthorDateData> exchange =
         restTemplate.exchange(

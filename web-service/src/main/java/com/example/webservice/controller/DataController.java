@@ -1,6 +1,8 @@
 package com.example.webservice.controller;
 
 import com.example.webservice.dto.analysisData.AnalysisAuthorData;
+import com.example.webservice.dto.analysisData.AnalysisAuthorDateData;
+import com.example.webservice.dto.analysisData.AnalysisDateData;
 import com.example.webservice.dto.inputData.MainData;
 import com.example.webservice.service.DataService;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,12 +24,22 @@ public class DataController {
 
   private final DataService dataService;
 
-  @GetMapping("/analysis/author")
-  public ResponseEntity<AnalysisAuthorData> getDataByParam(@RequestParam("author") String author) {
+  @GetMapping("/analysis")
+  public ResponseEntity<?> getDataByParam(
+      @RequestParam(value = "author", required = false) String author,
+      @RequestParam(value = "creatingDate", required = false) String creatingDate) {
 
-    HttpEntity<AnalysisAuthorData> dataByAuthor = dataService.getAnalysedDataByAuthor(author);
+    if (Objects.nonNull(author) && Objects.isNull(creatingDate)) {
+      return (ResponseEntity<AnalysisAuthorData>) dataService.getAnalysedDataByAuthor(author);
+    }
 
-    return (ResponseEntity<AnalysisAuthorData>) dataByAuthor;
+    if (Objects.nonNull(creatingDate) && Objects.isNull(author)) {
+      return (ResponseEntity<AnalysisDateData>)
+          dataService.getAnalysedDataByCreatingDate(creatingDate);
+    }
+
+    return (ResponseEntity<AnalysisAuthorDateData>)
+        dataService.getAnalysedDataByAuthorAndCreatingDate(author, creatingDate);
   }
 
   @GetMapping("/raw")

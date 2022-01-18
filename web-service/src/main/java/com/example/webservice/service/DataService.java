@@ -17,7 +17,7 @@ public interface DataService {
 
     HttpEntity<AnalysisAuthorData> getAnalysedDataByAuthor(String author);
 
-    HttpEntity<AnalysisDateData> getAnalysedDataByCreatingDate(LocalDateTime creatingDate);
+    HttpEntity<AnalysisDateData> getAnalysedDataByCreatingDate(String creatingDate);
 
-    HttpEntity<AnalysisAuthorDateData> getAnalysedDataByAuthorAndCreatingDate(String author, LocalDateTime creatingDate);
+    HttpEntity<AnalysisAuthorDateData> getAnalysedDataByAuthorAndCreatingDate(String author, String creatingDate);
 }
