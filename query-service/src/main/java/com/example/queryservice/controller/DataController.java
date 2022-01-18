@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-
 
 @RestController
 @RequiredArgsConstructor
@@ -22,6 +22,7 @@ import java.util.List;
 public class DataController {
 
   private final DataProjector dataProjector;
+
 
   @GetMapping("/input")
   public ResponseEntity<List<MainData>> getAllInputData() {
@@ -49,11 +50,12 @@ public class DataController {
     return ResponseEntity.ok(authorData);
   }
 
-  @GetMapping("/analysis/cratingDate")
+  @GetMapping("/analysis/creatingDate")
   public ResponseEntity<AnalysisDateData> getDataCountByCreatingDate(
-      @RequestParam("creatingDate") LocalDateTime creatingDate) {
+      @RequestParam("creatingDate") String creatingDate) {
 
-    AnalysisDateData dateData = dataProjector.projectAnalysisData(creatingDate);
+    AnalysisDateData dateData =
+        dataProjector.projectAnalysisData(LocalDate.parse(creatingDate).atStartOfDay());
 
     return ResponseEntity.ok(dateData);
   }

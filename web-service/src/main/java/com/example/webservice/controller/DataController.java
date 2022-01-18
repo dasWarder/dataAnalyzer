@@ -1,5 +1,8 @@
 package com.example.webservice.controller;
 
+import com.example.webservice.dto.analysisData.AnalysisAuthorData;
+import com.example.webservice.dto.analysisData.AnalysisAuthorDateData;
+import com.example.webservice.dto.analysisData.AnalysisDateData;
 import com.example.webservice.dto.inputData.MainData;
 import com.example.webservice.service.DataService;
 import lombok.RequiredArgsConstructor;
@@ -10,28 +13,40 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/data")
 public class DataController {
 
-    private final DataService dataService;
+  private final DataService dataService;
 
-    @GetMapping("/analysis/author")
-    public ResponseEntity<String> getDataByParam(@RequestParam("author") String author) {
+  @GetMapping("/analysis")
+  public ResponseEntity<?> getDataByParam(
+      @RequestParam(value = "author", required = false) String author,
+      @RequestParam(value = "creatingDate", required = false) String creatingDate) {
 
-        HttpEntity<String> dataByAuthor = dataService.getDataByAuthor(author);
-
-        return (ResponseEntity<String>) dataByAuthor;
+    if (Objects.nonNull(author) && Objects.isNull(creatingDate)) {
+      return (ResponseEntity<AnalysisAuthorData>) dataService.getAnalysedDataByAuthor(author);
     }
 
-    @GetMapping("/raw")
-    public ResponseEntity<Void> getAllData() {
-
-        HttpEntity<List<MainData>> allData = dataService.getAllData();
-
-        return ResponseEntity.noContent().build();
+    if (Objects.nonNull(creatingDate) && Objects.isNull(author)) {
+      return (ResponseEntity<AnalysisDateData>)
+          dataService.getAnalysedDataByCreatingDate(creatingDate);
     }
+
+    return (ResponseEntity<AnalysisAuthorDateData>)
+        dataService.getAnalysedDataByAuthorAndCreatingDate(author, creatingDate);
+  }
+
+  @GetMapping("/raw")
+  public ResponseEntity<List<MainData>> getAllData() {
+
+    HttpEntity<List<MainData>> allData = dataService.getAllData();
+
+    return (ResponseEntity<List<MainData>>) allData;
+  }
 }
