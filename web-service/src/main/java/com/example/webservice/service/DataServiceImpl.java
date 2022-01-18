@@ -11,10 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -71,7 +68,22 @@ public class DataServiceImpl implements DataService {
 
   @Override
   public HttpEntity<List<MainData>> getDataByAuthor(String author) {
-    return null;
+
+    HttpEntity<?> entity = getHttpEntity();
+    String uriTemplate = formulateUriTemplate(baseInputDataUri + "/author", "author");
+    Map<String, String> params = getParamsMap(new Param("author", author));
+
+    ResponseEntity<List<MainData>> exchange =
+        restTemplate.exchange(
+            uriTemplate,
+            HttpMethod.GET,
+            entity,
+            new ParameterizedTypeReference<List<MainData>>() {},
+            params);
+
+    log.info("In DataServiceImpl.getDataByAuthor - HttpEntity by author = {} processed", author);
+
+    return exchange;
   }
 
   @Override
@@ -82,22 +94,53 @@ public class DataServiceImpl implements DataService {
     Map<String, String> params = getParamsMap(new Param("author", author));
 
     HttpEntity<AnalysisAuthorData> exchange =
-        restTemplate.exchange(uriTemplate, HttpMethod.GET, entity, AnalysisAuthorData.class, params);
+        restTemplate.exchange(
+            uriTemplate, HttpMethod.GET, entity, AnalysisAuthorData.class, params);
 
-    log.info("In DataServiceImpl.getAnalysedDataByAuthor - HttpEntity by author = {} processed", author);
+    log.info(
+        "In DataServiceImpl.getAnalysedDataByAuthor - HttpEntity by author = {} processed", author);
 
     return exchange;
   }
 
   @Override
   public HttpEntity<AnalysisDateData> getAnalysedDataByCreatingDate(LocalDateTime creatingDate) {
-    return null;
+
+    HttpEntity<?> entity = getHttpEntity();
+    String uriTemplate =
+        formulateUriTemplate(baseAnalysisDataUri + "/creatingDate", "creatingDate");
+    Map<String, String> params = getParamsMap(new Param("creatingDate", creatingDate.toString()));
+
+    ResponseEntity<AnalysisDateData> exchange =
+        restTemplate.exchange(uriTemplate, HttpMethod.GET, entity, AnalysisDateData.class, params);
+
+    log.info(
+        "In DataServiceImpl.getAnalysedDataByCreatingDate - HttpEntity by creatingDate = {} processed",
+        creatingDate);
+
+    return exchange;
   }
 
   @Override
   public HttpEntity<AnalysisAuthorDateData> getAnalysedDataByAuthorAndCreatingDate(
       String author, LocalDateTime creatingDate) {
-    return null;
+
+    HttpEntity<?> entity = getHttpEntity();
+    String uriTemplate = formulateUriTemplate(baseAnalysisDataUri, "author", "creatingDate");
+    Map<String, String> params =
+        getParamsMap(
+            new Param("author", author), new Param("creatingDate", creatingDate.toString()));
+
+    ResponseEntity<AnalysisAuthorDateData> exchange =
+        restTemplate.exchange(
+            uriTemplate, HttpMethod.GET, entity, AnalysisAuthorDateData.class, params);
+
+    log.info(
+        "In DataServiceImpl.getAnalysedDataByAuthorAndCreatingDate - HttpEntity by author = {} and creatingDate = {} processed",
+        author,
+        creatingDate);
+
+    return exchange;
   }
 
   private HttpEntity<?> getHttpEntity() {
