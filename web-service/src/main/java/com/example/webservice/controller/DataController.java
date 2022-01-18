@@ -1,5 +1,6 @@
 package com.example.webservice.controller;
 
+import com.example.webservice.dto.analysisData.AnalysisAuthorData;
 import com.example.webservice.dto.inputData.MainData;
 import com.example.webservice.service.DataService;
 import lombok.RequiredArgsConstructor;
@@ -17,21 +18,21 @@ import java.util.List;
 @RequestMapping("/api/v1/data")
 public class DataController {
 
-    private final DataService dataService;
+  private final DataService dataService;
 
-    @GetMapping("/analysis/author")
-    public ResponseEntity<String> getDataByParam(@RequestParam("author") String author) {
+  @GetMapping("/analysis/author")
+  public ResponseEntity<AnalysisAuthorData> getDataByParam(@RequestParam("author") String author) {
 
-        HttpEntity<String> dataByAuthor = dataService.getDataByAuthor(author);
+    HttpEntity<AnalysisAuthorData> dataByAuthor = dataService.getAnalysedDataByAuthor(author);
 
-        return (ResponseEntity<String>) dataByAuthor;
-    }
+    return (ResponseEntity<AnalysisAuthorData>) dataByAuthor;
+  }
 
-    @GetMapping("/raw")
-    public ResponseEntity<Void> getAllData() {
+  @GetMapping("/raw")
+  public ResponseEntity<List<MainData>> getAllData() {
 
-        HttpEntity<List<MainData>> allData = dataService.getAllData();
+    HttpEntity<List<MainData>> allData = dataService.getAllData();
 
-        return ResponseEntity.noContent().build();
-    }
+    return (ResponseEntity<List<MainData>>) allData;
+  }
 }

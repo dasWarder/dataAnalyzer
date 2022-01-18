@@ -1,5 +1,6 @@
 package com.example.webservice.service;
 
+import com.example.webservice.dto.analysisData.AnalysisAuthorData;
 import com.example.webservice.dto.analysisData.AnalysisAuthorDateData;
 import com.example.webservice.dto.analysisData.AnalysisDateData;
 import com.example.webservice.dto.inputData.MainData;
@@ -11,12 +12,12 @@ import java.util.List;
 public interface DataService {
 
     HttpEntity<List<MainData>> getAllData();
-//
-//    HttpEntity<Page<MainData>> getDataByAuthor(String author);
 
-    HttpEntity<String> getDataByAuthor(String author);
+    HttpEntity<List<MainData>> getDataByAuthor(String author);
 
-    HttpEntity<AnalysisDateData> getDataByCreatingDate(LocalDateTime creatingDate);
+    HttpEntity<AnalysisAuthorData> getAnalysedDataByAuthor(String author);
 
-    HttpEntity<AnalysisAuthorDateData> getDataByAuthorAndCreatingDate(String author, LocalDateTime creatingDate);
+    HttpEntity<AnalysisDateData> getAnalysedDataByCreatingDate(LocalDateTime creatingDate);
+
+    HttpEntity<AnalysisAuthorDateData> getAnalysedDataByAuthorAndCreatingDate(String author, LocalDateTime creatingDate);
 }
