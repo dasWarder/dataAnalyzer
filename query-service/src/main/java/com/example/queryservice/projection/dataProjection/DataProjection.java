@@ -5,17 +5,15 @@ import com.example.queryservice.dto.query.analysisData.AnalysisDataCountByAuthor
 import com.example.queryservice.dto.query.analysisData.AnalysisDataCountByCreatingDate;
 import com.example.queryservice.dto.query.inputData.AllInputData;
 import com.example.queryservice.dto.query.inputData.InputDataByAuthor;
-import com.example.queryservice.dto.query.inputData.InputDataByDate;
 import com.example.queryservice.model.InputData;
-import org.springframework.data.domain.Page;
+
+import java.util.List;
 
 public interface DataProjection {
 
-  Page<InputData> handleInputData(AllInputData query);
+  List<InputData> handleInputData(AllInputData query);
 
-  Page<InputData> handleInputData(InputDataByAuthor query);
-
-  Page<InputData> handleInputData(InputDataByDate query);
+  List<InputData> handleInputData(InputDataByAuthor query);
 
   Long handleAnalysisData(AnalysisDataCountByAuthor query);
 

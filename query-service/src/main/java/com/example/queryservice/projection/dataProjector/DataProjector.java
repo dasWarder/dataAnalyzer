@@ -8,14 +8,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public interface DataProjector {
 
-  Page<MainData> projectInputData(Pageable pageable);
+  List<MainData> projectInputData();
 
-  Page<MainData> projectInputData(String author, Pageable pageable);
-
-  Page<MainData> projectInputData(LocalDateTime date, Pageable pageable);
+  List<MainData> projectInputData(String author);
 
   AnalysisAuthorData projectAnalysisData(String author);
 

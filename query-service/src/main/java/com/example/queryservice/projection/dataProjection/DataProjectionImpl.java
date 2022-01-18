@@ -5,15 +5,17 @@ import com.example.queryservice.dto.query.analysisData.AnalysisDataCountByAuthor
 import com.example.queryservice.dto.query.analysisData.AnalysisDataCountByCreatingDate;
 import com.example.queryservice.dto.query.inputData.AllInputData;
 import com.example.queryservice.dto.query.inputData.InputDataByAuthor;
-import com.example.queryservice.dto.query.inputData.InputDataByDate;
 import com.example.queryservice.model.InputData;
 import com.example.queryservice.repository.AnalysisDataReadRepository;
 import com.example.queryservice.repository.InputDataReadRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Slf4j
 @Service
@@ -26,29 +28,24 @@ public class DataProjectionImpl implements DataProjection {
 
   @Override
   @Transactional(readOnly = true)
-  public Page<InputData> handleInputData(AllInputData query) {
+  public List<InputData> handleInputData(AllInputData query) {
 
     log.info("In DataProjectionImpl. handleInputData - Handle data by allInputData query");
 
-    return inputDataRepository.findAll(query.getPageable());
+    Iterable<InputData> all = inputDataRepository.findAll();
+    log.info("Iterable - {}", all);
+
+    return StreamSupport.stream(inputDataRepository.findAll().spliterator(), false)
+        .collect(Collectors.toList());
   }
 
   @Override
   @Transactional(readOnly = true)
-  public Page<InputData> handleInputData(InputDataByAuthor query) {
+  public List<InputData> handleInputData(InputDataByAuthor query) {
 
     log.info("In DataProjectionImpl.handleInputData - Handle data by InputDataByAuthor query");
 
-    return inputDataRepository.findAllByAuthor(query.getAuthor(), query.getPageable());
-  }
-
-  @Override
-  @Transactional(readOnly = true)
-  public Page<InputData> handleInputData(InputDataByDate query) {
-
-    log.info("In DataProjectionImpl.handleInputData - Handle data by InputDataByDate query");
-
-    return inputDataRepository.findAllByDate(query.getDateTime(), query.getPageable());
+    return inputDataRepository.findAllByAuthor(query.getAuthor());
   }
 
   @Override

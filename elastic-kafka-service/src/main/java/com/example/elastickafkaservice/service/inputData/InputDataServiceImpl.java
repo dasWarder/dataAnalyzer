@@ -1,7 +1,7 @@
 package com.example.elastickafkaservice.service.inputData;
 
 import com.example.elastickafkaservice.exception.InputDataNotStoredException;
-import com.example.elastickafkaservice.model.InputData;
+import com.example.elastickafkaservice.model.InputDataDto;
 import com.example.elastickafkaservice.repository.InputDataRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,11 +17,11 @@ public class InputDataServiceImpl implements InputDataService {
     private final InputDataRepository inputDataRepository;
 
     @Override
-    public InputData saveInputData(InputData inputData) throws InputDataNotStoredException {
+    public InputDataDto saveInputData(InputDataDto inputDataDto) throws InputDataNotStoredException {
 
         log.info("In InputDataRepositoryImpl.saveInputData - Save a new input data");
 
-        InputData storedData = inputDataRepository.save(inputData);
+        InputDataDto storedData = inputDataRepository.save(inputDataDto);
 
         if(Objects.isNull(storedData)) {
 

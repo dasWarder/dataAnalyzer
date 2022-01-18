@@ -16,6 +16,4 @@ public class MainData {
     private String author;
 
     private String message;
-
-    private LocalDateTime creatingDate;
 }
