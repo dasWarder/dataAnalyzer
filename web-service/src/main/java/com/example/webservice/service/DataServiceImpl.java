@@ -3,9 +3,14 @@ package com.example.webservice.service;
 import com.example.webservice.dto.analysisData.AnalysisAuthorData;
 import com.example.webservice.dto.analysisData.AnalysisAuthorDateData;
 import com.example.webservice.dto.analysisData.AnalysisDateData;
+import com.example.webservice.dto.inputData.MainData;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.asm.TypeReference;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -16,6 +21,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -31,11 +37,26 @@ public class DataServiceImpl implements DataService {
   @Value("${uri.analysis}")
   private String baseAnalysisDataUri;
 
-//  @Override
-//  public HttpEntity<Page<MainData>> getAllData(Pageable pageable) {
-//
-//    return null;
-//  }
+  @Override
+  public HttpEntity<List<MainData>> getAllData() {
+
+    HttpHeaders headers = new HttpHeaders();
+    headers.set(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE);
+    HttpEntity<?> entity = new HttpEntity<>(headers);
+
+    String urlTemplate =
+            UriComponentsBuilder.fromHttpUrl(baseInputDataUri)
+                    .encode()
+                    .toUriString();
+
+    HttpEntity<List<MainData>> exchange =
+            restTemplate.exchange(
+                    urlTemplate, HttpMethod.GET, entity, new ParameterizedTypeReference<List<MainData>>() {});
+
+    log.info("PAGEABLE: {}", exchange);
+
+    return null;
+  }
 //
 //  @Override
 //  public HttpEntity<Page<MainData>> getDataByAuthor(String author, Pageable pageable) {

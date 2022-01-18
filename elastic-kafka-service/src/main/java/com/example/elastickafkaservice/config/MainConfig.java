@@ -24,7 +24,6 @@ public class MainConfig {
     public ObjectMapper getObjectMapper() {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
 
         return objectMapper;
     }

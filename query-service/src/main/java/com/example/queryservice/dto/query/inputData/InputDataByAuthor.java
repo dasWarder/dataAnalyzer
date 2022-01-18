@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.domain.Pageable;
 
 @Data
 @Builder
@@ -12,7 +11,5 @@ import org.springframework.data.domain.Pageable;
 @AllArgsConstructor
 public class InputDataByAuthor {
 
-    private String author;
-
-    private Pageable pageable;
+  private String author;
 }

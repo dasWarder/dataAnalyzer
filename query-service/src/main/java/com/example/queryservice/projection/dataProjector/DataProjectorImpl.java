@@ -1,15 +1,14 @@
 package com.example.queryservice.projection.dataProjector;
 
-import com.example.queryservice.dto.read.analysisData.AnalysisAuthorData;
-import com.example.queryservice.dto.read.analysisData.AnalysisAuthorDateData;
-import com.example.queryservice.dto.read.analysisData.AnalysisDateData;
-import com.example.queryservice.dto.read.inputData.MainData;
 import com.example.queryservice.dto.query.analysisData.AnalysisDataCountByAuthor;
 import com.example.queryservice.dto.query.analysisData.AnalysisDataCountByAuthorAndCreatingDate;
 import com.example.queryservice.dto.query.analysisData.AnalysisDataCountByCreatingDate;
 import com.example.queryservice.dto.query.inputData.AllInputData;
 import com.example.queryservice.dto.query.inputData.InputDataByAuthor;
-import com.example.queryservice.dto.query.inputData.InputDataByDate;
+import com.example.queryservice.dto.read.analysisData.AnalysisAuthorData;
+import com.example.queryservice.dto.read.analysisData.AnalysisAuthorDateData;
+import com.example.queryservice.dto.read.analysisData.AnalysisDateData;
+import com.example.queryservice.dto.read.inputData.MainData;
 import com.example.queryservice.mappingService.dto.AnalysisDataMapper;
 import com.example.queryservice.mappingService.dto.InputDataMapper;
 import com.example.queryservice.mappingService.query.AnalysisDataQueryMapper;
@@ -17,11 +16,11 @@ import com.example.queryservice.mappingService.query.InputDataQueryMapper;
 import com.example.queryservice.projection.dataProjection.DataProjection;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -39,38 +38,25 @@ public class DataProjectorImpl implements DataProjector {
   private final AnalysisDataQueryMapper analysisDataQueryMapper;
 
   @Override
-  public Page<MainData> projectInputData(Pageable pageable) {
+  public List<MainData> projectInputData() {
 
     log.info("In DataProjectorImpl.projectInputData - project to AllInputData query");
 
-    AllInputData allInputData = inputDataQueryMapper.paramsToAllInputData(pageable);
-
-    return dataProjection.handleInputData(allInputData).map(inputDataMapper::inputDataToMainData);
+     return dataProjection.handleInputData(new AllInputData()).stream()
+        .map(inputDataMapper::inputDataToMainData)
+        .collect(Collectors.toList());
   }
 
   @Override
-  public Page<MainData> projectInputData(String author, Pageable pageable) {
+  public List<MainData> projectInputData(String author) {
 
     log.info("In DataProjectorImpl.projectInputData - project to InputDataByAuthor query");
 
-    InputDataByAuthor inputDataByAuthor =
-        inputDataQueryMapper.paramsToInputDataByAuthor(author, pageable);
+    InputDataByAuthor inputDataByAuthor = inputDataQueryMapper.paramsToInputDataByAuthor(author);
 
-    return dataProjection
-        .handleInputData(inputDataByAuthor)
-        .map(inputDataMapper::inputDataToMainData);
-  }
-
-  @Override
-  public Page<MainData> projectInputData(LocalDateTime date, Pageable pageable) {
-
-    log.info("In DataProjectorImpl.projectInputData - project to InputDataByDate query");
-
-    InputDataByDate inputDataByDate = inputDataQueryMapper.paramsToInputDataByDate(date, pageable);
-
-    return dataProjection
-        .handleInputData(inputDataByDate)
-        .map(inputDataMapper::inputDataToMainData);
+    return dataProjection.handleInputData(inputDataByAuthor).stream()
+        .map(inputDataMapper::inputDataToMainData)
+        .collect(Collectors.toList());
   }
 
   @Override

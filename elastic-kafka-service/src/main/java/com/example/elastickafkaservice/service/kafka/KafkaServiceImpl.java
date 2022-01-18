@@ -1,8 +1,10 @@
 package com.example.elastickafkaservice.service.kafka;
 
+import com.example.elastickafkaservice.dto.InputData;
 import com.example.elastickafkaservice.exception.InputDataNotStoredException;
-import com.example.elastickafkaservice.model.InputData;
+import com.example.elastickafkaservice.model.InputDataDto;
 import com.example.elastickafkaservice.service.inputData.InputDataService;
+import com.example.elastickafkaservice.util.MappingUtility;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -24,22 +26,25 @@ public class KafkaServiceImpl implements KafkaService {
   @Override
   @KafkaListener(
       id = "#{'${kafka.keys.data}'}",
-          topics = {"#{'${kafka.topics.data}'}"},
+      topics = {"#{'${kafka.topics.data}'}"},
       groupId = "#{'${kafka.groups.data}'}")
   public void receiveMessage(String data) throws InputDataNotStoredException {
 
-    InputData inputData = mapObject(data);
-    InputData storedData = inputDataService.saveInputData(inputData);
+    InputDataDto inputDataDto = mapObject(data);
+    InputDataDto storedData = inputDataService.saveInputData(inputDataDto);
 
     log.info(
         "In KafkaServiceImpl.receiveMessage - InputData with id = {} stored", storedData.getId());
   }
 
-  private InputData mapObject(String data) {
+  private InputDataDto mapObject(String data) {
+
+    InputData inputData = null;
     try {
-      return objectMapper.readValue(data, InputData.class);
+      inputData = objectMapper.readValue(data, InputData.class);
     } catch (JsonProcessingException e) {
-      throw new RuntimeException();
+      throw new RuntimeException(e.getMessage());
     }
+    return MappingUtility.toInputData(inputData);
   }
 }

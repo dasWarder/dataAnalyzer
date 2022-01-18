@@ -14,7 +14,7 @@ kafka:
   keys:
     data: data
   groups:
-    data: elastic_data_group
+    data: elastic_data_group_1
 
 elasticsearch:
   port: localhost:9200
