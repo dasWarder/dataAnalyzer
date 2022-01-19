@@ -32,9 +32,6 @@ public class DataProjectionImpl implements DataProjection {
 
     log.info("In DataProjectionImpl. handleInputData - Handle data by allInputData query");
 
-    Iterable<InputData> all = inputDataRepository.findAll();
-    log.info("Iterable - {}", all);
-
     return StreamSupport.stream(inputDataRepository.findAll().spliterator(), false)
         .collect(Collectors.toList());
   }
@@ -45,7 +42,7 @@ public class DataProjectionImpl implements DataProjection {
 
     log.info("In DataProjectionImpl.handleInputData - Handle data by InputDataByAuthor query");
 
-    return inputDataRepository.findAllByAuthor(query.getAuthor());
+    return inputDataRepository.findByAuthor(query.getAuthor());
   }
 
   @Override

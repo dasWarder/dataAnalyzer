@@ -9,6 +9,9 @@ import com.example.queryservice.model.InputData;
 
 import java.util.List;
 
+/**
+ * The interface for projection: receiving an event object and return data based on this request
+ */
 public interface DataProjection {
 
   List<InputData> handleInputData(AllInputData query);

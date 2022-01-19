@@ -1,5 +1,6 @@
 package com.example.queryservice.controller;
 
+import com.example.queryservice.controller.util.ControllerUtility;
 import com.example.queryservice.dto.read.analysisData.AnalysisAuthorData;
 import com.example.queryservice.dto.read.analysisData.AnalysisAuthorDateData;
 import com.example.queryservice.dto.read.analysisData.AnalysisDateData;
@@ -12,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -22,7 +21,6 @@ import java.util.List;
 public class DataController {
 
   private final DataProjector dataProjector;
-
 
   @GetMapping("/input")
   public ResponseEntity<List<MainData>> getAllInputData() {
@@ -55,17 +53,19 @@ public class DataController {
       @RequestParam("creatingDate") String creatingDate) {
 
     AnalysisDateData dateData =
-        dataProjector.projectAnalysisData(LocalDate.parse(creatingDate).atStartOfDay());
+        dataProjector.projectAnalysisData(
+            ControllerUtility.convertDateTimeStringToLDT(creatingDate));
 
     return ResponseEntity.ok(dateData);
   }
 
   @GetMapping("/analysis")
   public ResponseEntity<AnalysisAuthorDateData> getDataCountByAuthorAndCreatingDate(
-      @RequestParam("author") String author,
-      @RequestParam("creatingDate") LocalDateTime creatingDate) {
+      @RequestParam("author") String author, @RequestParam("creatingDate") String creatingDate) {
 
-    AnalysisAuthorDateData authorDateData = dataProjector.projectAnalysisData(author, creatingDate);
+    AnalysisAuthorDateData authorDateData =
+        dataProjector.projectAnalysisData(
+            author, ControllerUtility.convertDateTimeStringToLDT(creatingDate));
 
     return ResponseEntity.ok(authorDateData);
   }
