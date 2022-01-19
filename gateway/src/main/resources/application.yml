@@ -9,7 +9,23 @@ spring:
       discovery:
         locator:
           enabled: true
-          lower-case-service-id: true
+          lower-case-service-id: false
+      routes:
+        - id: web-data-producer
+          uri: lb://web-data-producer
+          predicates:
+            - Path=/api/v1/data
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+
+        - id: web-service
+          uri: lb://web-service
+          predicates:
+            - Path=/api/v1/data/**
+            - Method=GET
+          filters:
+            - RemoveRequestHeader=Cookie
 
 eureka:
   client:

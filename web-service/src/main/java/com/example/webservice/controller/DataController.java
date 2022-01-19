@@ -42,18 +42,13 @@ public class DataController {
   }
 
   @GetMapping("/raw")
-  public ResponseEntity<List<MainData>> getAllData() {
+  public ResponseEntity<List<MainData>> getAllData(@RequestParam(value = "author", required = false) String author) {
 
-    HttpEntity<List<MainData>> allData = dataService.getAllData();
+    if(Objects.nonNull(author)) {
+      return (ResponseEntity<List<MainData>>) dataService.getDataByAuthor(author);
+    }
 
-    return (ResponseEntity<List<MainData>>) allData;
+    return (ResponseEntity<List<MainData>>) dataService.getAllData();
   }
 
-  @GetMapping("/raw/author")
-  public ResponseEntity<List<MainData>> getDataByAuthor(@RequestParam("author") String author) {
-
-    HttpEntity<List<MainData>> dataByAuthor = dataService.getDataByAuthor(author);
-
-    return (ResponseEntity<List<MainData>>) dataByAuthor;
-  }
 }
