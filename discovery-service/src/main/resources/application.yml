@@ -1,0 +1,15 @@
+server:
+  port: 2229
+
+spring:
+  application:
+    name: discovery-server
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://localhost:2229/eureka
