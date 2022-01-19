@@ -18,7 +18,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,13 +29,13 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class DataServiceImpl implements DataService {
 
-  private final RestTemplate restTemplate;
-
   @Value("${uri.input}")
   private String baseInputDataUri;
 
   @Value("${uri.analysis}")
   private String baseAnalysisDataUri;
+
+  private final RestTemplate restTemplate;
 
   @Data
   @NoArgsConstructor
@@ -128,8 +127,7 @@ public class DataServiceImpl implements DataService {
     HttpEntity<?> entity = getHttpEntity();
     String uriTemplate = formulateUriTemplate(baseAnalysisDataUri, "author", "creatingDate");
     Map<String, String> params =
-        getParamsMap(
-            new Param("author", author), new Param("creatingDate", creatingDate));
+        getParamsMap(new Param("author", author), new Param("creatingDate", creatingDate));
 
     ResponseEntity<AnalysisAuthorDateData> exchange =
         restTemplate.exchange(
@@ -150,6 +148,13 @@ public class DataServiceImpl implements DataService {
     return new HttpEntity<>(headers);
   }
 
+  /**
+   * Formulate uri template string for using in RestTemplate
+   *
+   * @param uri base endpoint
+   * @param params request params, not required param
+   * @return encoded UriString with/without param places
+   */
   private String formulateUriTemplate(String uri, String... params) {
 
     if (Objects.isNull(params) || params.length == 0) {

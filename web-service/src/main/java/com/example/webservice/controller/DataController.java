@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -48,5 +47,13 @@ public class DataController {
     HttpEntity<List<MainData>> allData = dataService.getAllData();
 
     return (ResponseEntity<List<MainData>>) allData;
+  }
+
+  @GetMapping("/raw/author")
+  public ResponseEntity<List<MainData>> getDataByAuthor(@RequestParam("author") String author) {
+
+    HttpEntity<List<MainData>> dataByAuthor = dataService.getDataByAuthor(author);
+
+    return (ResponseEntity<List<MainData>>) dataByAuthor;
   }
 }
