@@ -9,10 +9,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="web-data-producer" />
         <module name="elastic-kafka-service" />
+        <module name="config-service" />
         <module name="discovery-service" />
         <module name="gateway" />
       </profile>
-      <profile name="Annotation profile for analytics-service" enabled="true">
+      <profile name="Annotation profile for web-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -28,6 +29,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="analytics-service" target="11" />
+      <module name="config-service" target="11" />
       <module name="discovery-service" target="11" />
       <module name="elastic-kafka-service" target="11" />
       <module name="elastic-service" target="11" />
@@ -41,6 +43,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="analytics-service" options="-parameters -Amapstruct.defaultComponentModel=spring" />
+      <module name="config-service" options="-parameters" />
       <module name="discovery-service" options="-parameters" />
       <module name="elastic-kafka-service" options="-parameters" />
       <module name="elastic-service" options="-parameters" />
