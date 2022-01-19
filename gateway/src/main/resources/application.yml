@@ -9,7 +9,7 @@ spring:
       discovery:
         locator:
           enabled: true
-          lower-case-service-id: false
+          lower-case-service-id: true
       routes:
         - id: web-data-producer
           uri: lb://web-data-producer

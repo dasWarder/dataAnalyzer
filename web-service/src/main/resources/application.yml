@@ -1,15 +1,17 @@
 server:
-  port: 2228
+  port: ${PORT:0}
 
 spring:
   application:
     name: web-service
 
 uri:
-  input: http://localhost:2227/api/v1/data/input
-  analysis: http://localhost:2227/api/v1/data/analysis
+  input: http://localhost:2230/query-service/api/v1/data/input
+  analysis: http://localhost:2230/query-service/api/v1/data/analysis
 
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:2229/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
