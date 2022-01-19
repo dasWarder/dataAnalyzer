@@ -1,0 +1,16 @@
+server:
+  port: 2231
+
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/dasWarder/analyzerConfig
+          username: ${GIT_USER}
+          password: ${GITHUB_ACCESS_TOKEN}
+          default-label: main
+

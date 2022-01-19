@@ -1,8 +1,6 @@
-server:
-  port: ${PORT:0}
-
-
 spring:
+  config:
+    import: optional:configserver:http://localhost:2231
   kafka:
     producer:
       bootstrap-servers: 127.0.0.1:9092
@@ -16,9 +14,3 @@ kafka:
     data: rawData
   keys:
     data: data
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:2229/eureka
-  instance:
-    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}

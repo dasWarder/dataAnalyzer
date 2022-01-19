@@ -1,17 +1,9 @@
-server:
-  port: ${PORT:0}
-
 spring:
+  config:
+    import: optional:configserver:http://localhost:2231
   application:
     name: web-service
 
 uri:
   input: http://localhost:2230/query-service/api/v1/data/input
   analysis: http://localhost:2230/query-service/api/v1/data/analysis
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:2229/eureka
-  instance:
-    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
