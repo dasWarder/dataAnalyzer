@@ -10,6 +10,10 @@ import org.springframework.data.domain.Pageable;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Some kind of a projector class for CQRS patter.
+ * Receive request params, formulate event objects and return data based on the events
+ */
 public interface DataProjector {
 
   List<MainData> projectInputData();
