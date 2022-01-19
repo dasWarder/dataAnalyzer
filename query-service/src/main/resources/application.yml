@@ -2,6 +2,8 @@ server:
   port: 2227
 
 spring:
+  application:
+    name: query-service
   datasource:
     url: jdbc:postgresql://localhost:3344/analysis_db
     username: user
@@ -12,6 +14,11 @@ spring:
       show-sql: true
       hibernate:
         ddl-auto: none
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:2229/eureka
 
 elasticsearch:
   port: localhost:9200
