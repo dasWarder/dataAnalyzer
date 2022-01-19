@@ -2,6 +2,8 @@ server:
   port: 2226
 
 spring:
+  application:
+    name: analytics-service
   liquibase:
     change-log: classpath:db.changelog/db.changelog-master.xml
     enabled: true
@@ -20,6 +22,11 @@ spring:
       bootstrap-servers: 127.0.0.1:9092
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:2229/eureka
 
 kafka:
   topics:

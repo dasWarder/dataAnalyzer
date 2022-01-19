@@ -1,15 +1,22 @@
 server:
   port: 2224
 
+
 spring:
   kafka:
     producer:
       bootstrap-servers: 127.0.0.1:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  application:
+    name: web-data-producer
 
 kafka:
   topics:
     data: rawData
   keys:
     data: data
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:2229/eureka
