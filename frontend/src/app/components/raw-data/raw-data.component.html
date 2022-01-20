@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="content">
+    <form (submit)="getAllDataByAuthor()" >
+      <div class="form-group">
+        <input id="author" type="text" placeholder="Author's name" [(ngModel)]="author" name="author" [value]="author"/>
+        <button class="btn btn-sm btn-success mx-3" type="submit">Search</button>
+        <button class="btn btn-sm btn-danger" type="button" (click)="getAllData()">Reset</button>
+      </div>
+    </form>
+    <table class="table" *ngIf="rawData.length != 0; else noData">
+      <thead>
+        <tr>
+          <th>author</th>
+          <th>message</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of rawData">
+          <td>{{ data.author }}</td>
+          <td>{{ data.message }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #noData>
+  <div class="px-5 text-center">
+    <h5 style="color: gray">There is no data yet</h5>
+  </div>
+</ng-template>
