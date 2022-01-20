@@ -7,12 +7,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './header/header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RawDataComponent } from './raw-data/raw-data.component';
+import { MainComponent } from './main/main.component';
+import { AnalyzedDataComponent } from './analyzed-data/analyzed-data.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    RawDataComponent
+    RawDataComponent,
+    MainComponent,
+    AnalyzedDataComponent
   ],
   imports: [
     BrowserModule,
