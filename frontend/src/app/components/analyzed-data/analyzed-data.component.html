@@ -1,1 +1,26 @@
-<p>analyzed-data works!</p>
+<div class="container col-md-2 offset-md-5 p-3">
+  <div class="content">
+    <h3>Filters</h3>
+    <form (submit)="getDataByParams()">
+      <div class="form-group">
+        <input class="form-control" id="author" type="text" placeholder="Author's name" [(ngModel)]="author" name="author" [value]="author"/>
+      </div>
+      <div class="form-group">
+        <input class="form-control" id="creatingDate" type="date" placeholder="Creating date" [(ngModel)]="creatingDate" name="creatingDate" [value]="creatingDate">
+      </div>
+      <button class="btn btn-sm btn-success my-1" type="submit">Search</button>
+      <div class="my-2">
+        <p id="authorName" name="authorName" *ngIf="viewModel.author != null">Author's name: <strong>{{ viewModel.author }}</strong></p>
+        <p *ngIf="viewModel.creatingDate != null">Creating date: <strong>{{ viewModel.creatingDate | date }}</strong></p>
+        <p *ngIf="viewModel.messagesCount != null">Number of messages: <strong>{{ viewModel.messagesCount }}</strong></p>
+      </div>
+    </form>
+  </div>
+</div>
+
+<ng-template #noData>
+  <div class="px-5 text-center">
+    <h5 style="color: gray">There is no data yet</h5>
+  </div>
+</ng-template>
+

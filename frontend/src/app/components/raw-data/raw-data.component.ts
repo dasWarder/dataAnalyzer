@@ -12,8 +12,9 @@ export class RawDataComponent implements OnInit {
 
   rawData: Array<MainData> = [];
   author: string = "";
+  isFilterOpen = false;
 
-  constructor(private dataService: DataService, private router: Router) {
+  constructor(private dataService: DataService) {
   }
 
   ngOnInit(): void {
