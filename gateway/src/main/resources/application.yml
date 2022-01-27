@@ -31,3 +31,8 @@ spring:
             - Method=GET
           filters:
             - RemoveRequestHeader=Cookie
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "beans,configprops,env,health,httptrace,info"
