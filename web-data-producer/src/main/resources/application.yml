@@ -14,6 +14,7 @@ spring:
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
   application:
     name: web-data-producer
+
 kafka:
   topics:
     data: rawData
