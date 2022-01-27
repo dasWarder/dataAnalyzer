@@ -1,6 +1,12 @@
 spring:
   config:
     import: optional:configserver:http://localhost:2231
+  rabbitmq:
+    username: ${POSTGRE_USER}
+    password: ${POSTGRE_PASS}
+    host: localhost
+    port: 5672
+    virtual-host: /
   kafka:
     producer:
       bootstrap-servers: 127.0.0.1:9092
@@ -8,7 +14,6 @@ spring:
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
   application:
     name: web-data-producer
-
 kafka:
   topics:
     data: rawData
