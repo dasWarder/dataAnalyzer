@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: config-server
+  profiles:
+    active: git
   rabbitmq:
     host: localhost
     username: ${POSTGRE_USER}
