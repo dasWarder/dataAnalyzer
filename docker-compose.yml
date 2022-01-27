@@ -43,6 +43,8 @@ services:
       - '9300:9300'
     environment:
       - discovery.type=single-node
+    networks:
+      - data-analyzer
 
   postgre:
     image: postgres:13.5-alpine3.15
@@ -54,4 +56,19 @@ services:
       POSTGRES_USER: ${POSTGRE_USER}
       POSTGRES_PASSWORD: ${POSTGRE_PASS}
       POSTGRES_DB: analysis_db
+    networks:
+      - data-analyzer
+
+  rabbitmq:
+    image: 'bitnami/rabbitmq:latest'
+    container_name: 'rabbit-mq'
+    restart: always
+    ports:
+      - '15672:15672'
+      - '5672:5672'
+    environment:
+      RABBITMQ_USERNAME: ${POSTGRE_USER}
+      RABBITMQ_PASSWORD: ${POSTGRE_PASS}
+    networks:
+      - data-analyzer
 

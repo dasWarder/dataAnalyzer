@@ -3,6 +3,12 @@ spring:
     name: analytics-service
   config:
     import: optional:configserver:http://localhost:2231
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: ${POSTGRE_USER}
+    password: ${POSTGRE_PASS}
+    virtual-host: /
   liquibase:
     change-log: classpath:db.changelog/db.changelog-master.xml
     enabled: true

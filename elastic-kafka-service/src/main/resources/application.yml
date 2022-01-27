@@ -3,6 +3,12 @@ spring:
     import: optional:configserver:http://localhost:2231
   application:
     name: elastic-kafka-service
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: ${POSTGRE_USER}
+    password: ${POSTGRE_PASS}
+    virtual-host: /
   kafka:
     consumer:
       bootstrap-servers: 127.0.0.1:9092

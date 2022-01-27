@@ -1,10 +1,15 @@
 server:
   port: 2231
 
-
 spring:
   application:
     name: config-server
+  rabbitmq:
+    host: localhost
+    username: ${POSTGRE_USER}
+    password: ${POSTGRE_PASS}
+    port: 5672
+    virtual-host: /
   cloud:
     config:
       server:
@@ -14,3 +19,9 @@ spring:
           password: ${GITHUB_ACCESS_TOKEN}
           default-label: main
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - busrefresh

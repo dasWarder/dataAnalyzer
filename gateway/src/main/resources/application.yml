@@ -1,9 +1,14 @@
-server:
-  port: 2230
-
 spring:
   application:
     name: gateway
+  config:
+    import: optional:configserver:http://localhost:2231
+  rabbitmq:
+    host: localhost
+    username: ${POSTGRE_USER}
+    password: ${POSTGRE_PASS}
+    port: 5672
+    virtual-host: /
   cloud:
     gateway:
       discovery:
@@ -26,8 +31,3 @@ spring:
             - Method=GET
           filters:
             - RemoveRequestHeader=Cookie
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:2229/eureka

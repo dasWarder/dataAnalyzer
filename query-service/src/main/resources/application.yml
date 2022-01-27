@@ -3,6 +3,12 @@ spring:
     name: query-service
   config:
     import: optional:configserver:http://localhost:2231
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: ${POSTGRE_USER}
+    password: ${POSTGRE_PASS}
+    virtual-host: /
   datasource:
     url: jdbc:postgresql://localhost:3344/analysis_db
     username: user

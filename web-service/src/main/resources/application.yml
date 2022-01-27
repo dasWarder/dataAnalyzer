@@ -3,6 +3,12 @@ spring:
     import: optional:configserver:http://localhost:2231
   application:
     name: web-service
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: ${POSTGRE_USER}
+    password: ${POSTGRE_PASS}
+    virtual-host: /
 
 uri:
   input: http://localhost:2230/query-service/api/v1/data/input
