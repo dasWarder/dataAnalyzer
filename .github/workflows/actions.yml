@@ -1,0 +1,15 @@
+name: GitHub-Actions-Workflow-test
+
+on:
+  push:
+    branches: [ main ]
+    
+  workflow_dispatch:
+
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run tests
+        run: echo "Hello World!"
